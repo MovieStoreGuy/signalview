@@ -20,13 +20,13 @@ func TestCachedRequests(t *testing.T) {
 	req, err := generator(context.TODO(), http.MethodGet, "http://localhost", nil)
 	require.NoError(t, err)
 	require.Equal(t, []string{testToken}, req.Header["X-Sf-Token"])
-	require.Equal(t, []string{"application/json"}, req.Header["Content-Type"])
+	require.NotEqual(t, []string{"application/json"}, req.Header["Content-Type"])
 	require.Equal(t, []string{"signalview"}, req.Header["User-Agent"])
 
 	_, err = generator(nil, "", "", nil)
 	require.Error(t, err)
 
-	req, err = generator(context.TODO(), http.MethodGet, "http://localhost", nil)
+	req, err = generator(context.TODO(), http.MethodPost, "http://localhost", nil)
 	require.NoError(t, err)
 	require.Equal(t, []string{testToken}, req.Header["X-Sf-Token"])
 	require.Equal(t, []string{"application/json"}, req.Header["Content-Type"])
@@ -41,5 +41,5 @@ func TestConfiguredClient(t *testing.T) {
 	c = client.NewConfiguredClient(func(cl *http.Client) {
 		cl.Timeout = 0
 	})
-	require.Equal(t, c.Timeout, 0)
+	require.Equal(t, c.Timeout, time.Duration(0))
 }

@@ -45,7 +45,9 @@ func NewCachedRequest(token string) func(ctx context.Context, method, url string
 			return nil, err
 		}
 		req.Header.Add("X-SF-TOKEN", token)
-		req.Header.Add("Content-Type", contentType)
+		if method != http.MethodGet {
+			req.Header.Add("Content-Type", contentType)
+		}
 		// Override the default language user agent to be clearly defined
 		req.Header.Add("User-Agent", userAgent)
 		return req, nil
