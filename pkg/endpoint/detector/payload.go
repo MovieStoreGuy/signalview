@@ -24,14 +24,14 @@ type DetailResultsPayload struct {
 	Name            string         `json:"name"`
 	OverMTSLimit    bool           `json:"overMTSLimit,omitempty"`
 	Rules           []struct {
-		Description          *string             `json:"description,omitempty"`
-		DetectLabel          string              `json:"detectLabel"`
-		Disabled             bool                `json:"disabled,omitempty"`
-		Notifications        []map[string]string `json:"notifications,omitempty"`
-		ParameterizedBody    string              `json:"parameterizedBody,omitempty"`
-		ParameterizedSubject string              `json:"parameterizedSubject,omitempty"`
-		RunbookURL           string              `json:"runbookUrl,omitempty"`
-		Severity             string              `json:"severity,omitempty"`
+		Description          *string                  `json:"description,omitempty"`
+		DetectLabel          string                   `json:"detectLabel"`
+		Disabled             bool                     `json:"disabled,omitempty"`
+		Notifications        []map[string]interface{} `json:"notifications,omitempty"`
+		ParameterizedBody    string                   `json:"parameterizedBody,omitempty"`
+		ParameterizedSubject string                   `json:"parameterizedSubject,omitempty"`
+		RunbookURL           string                   `json:"runbookUrl,omitempty"`
+		Severity             string                   `json:"severity,omitempty"`
 	} `json:"rules"`
 	Tags  []string `json:"tags,omitempty"`
 	Teams []string `json:"teams,omitempty"`

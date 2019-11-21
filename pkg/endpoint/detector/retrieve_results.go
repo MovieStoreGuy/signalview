@@ -76,6 +76,7 @@ func GetMatching(ctx context.Context, log *logrus.Logger, client *http.Client, c
 		}
 		var bundle BundledPayload
 		if err = json.Unmarshal(buff, &bundle); err != nil {
+			log.Info(string(buff))
 			return nil, err
 		}
 		if completeBundle.Count == 0 {
