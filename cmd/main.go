@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"os"
 
 	"github.com/MovieStoreGuy/signalview/pkg/client"
 	"github.com/MovieStoreGuy/signalview/pkg/config"
@@ -25,6 +26,7 @@ func main() {
 		conf.ConfigureClient,
 	)
 	log := logrus.New()
+	log.SetOutput(os.Stdout)
 	payload, err := detector.GetMatching(context.Background(), log, c, conf, nil)
 	if err != nil {
 		log.WithError(err).Fatal("unable to process request")

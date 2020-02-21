@@ -1,8 +1,8 @@
 package detector
 
 import (
-	"fmt"
 	"bytes"
+	"fmt"
 	"text/template"
 	"time"
 )
@@ -39,7 +39,15 @@ Number of detectors: {{.count}}
 ======================
 | No notifications   |
 ======================
-{{ range $detector := .details.DisabledRules }} {{ range $field, $value := $detector}}| {{ $field }} : {{$value}} {{ end }}
+{{ range $detector := .details.NoNotifications }} {{ range $field, $value := $detector}}| {{ $field }} : {{$value}} {{ end }}
+{{ end }}
+======================
+{{ end }}
+{{ if .details.TestTeamUsed }}
+======================
+| Test Team used     |
+======================
+{{ range $detector := .details.TestTeamUsed }} {{ range $field, $value := $detector}}| {{ $field }} : {{$value}} {{ end }}
 {{ end }}
 ======================
 {{ end }}
@@ -52,6 +60,7 @@ type Reporter struct {
 		DisabledRules     []map[string]string
 		DisabledDetectors []map[string]string
 		NoNotifications   []map[string]string
+		TestTeamUsed      []map[string]string
 	}
 }
 
